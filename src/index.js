@@ -1,36 +1,45 @@
 import React from 'react';
-import ReactDom from' react-dom';
+import ReactDOM from 'react-dom';
 import './index.css';
 
+// The Square component renders a single <button>
 class Square extends React.Component {
-    render() {
-      return (
-        <button className="square">
-          {/* TODO */}
-        </button>
-      );
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: null,
+    };
   }
-  
-  class Board extends React.Component {
-    renderSquare(i) {
-      return <Square />;
-    }
-  
-    render() {
-      const status = 'Next player: X';
- 
-      return (
+  render() {
+    return (
+      <button className="square" 
+      onClick={() => this.setState({value:'X'})}>
+        {this.state.value}
+      </button>
+    );
+  }
+}
+
+// Board renders 9 squares
+class Board extends React.Component {
+  renderSquare(i) {
+    return <Square value={i} />;
+  }
+
+  render() {
+    const status = 'Next player: X';
+
+    return (
       <div>
-          <div className="status">{status}</div>
+        <div className="status">{status}</div>
         <div className="board-row">
           {this.renderSquare(0)}
-          {this.renderSqaure(1)}
+          {this.renderSquare(1)}
           {this.renderSquare(2)}
         </div>
         <div className="board-row">
           {this.renderSquare(3)}
-          {this.renderSqaure(4)}
+          {this.renderSquare(4)}
           {this.renderSquare(5)}
         </div>
         <div className="board-row">
@@ -39,30 +48,30 @@ class Square extends React.Component {
           {this.renderSquare(8)}
         </div>
       </div>
-        );
-      }
-    }
-    
-    class Game extends React.Component {
-      render() {
-        return (
-          <div className="game">
-            <div className="game-board">
-              <Board />
-            </div>
-            <div className="game-info">
-              <div>{/* status */}</div>
-              <ol>{/* TODO */}</ol>
-            </div>
-          </div>
-        );
-      }
-    }
-    
-    // ========================================
-    
-    ReactDOM.render(
-      <Game />,
-      document.getElementById('root')
     );
-    
+  }
+}
+
+// Game component renders a board with placeholder values
+class Game extends React.Component {
+  render() {
+    return (
+      <div className="game">
+        <div className="game-board">
+          <Board />
+        </div>
+        <div className="game-info">
+          <div>{/* status */}</div>
+          <ol>{/* TODO */}</ol>
+        </div>
+      </div>
+    );
+  }
+}
+
+// ========================================
+
+ReactDOM.render(
+  <Game />,
+  document.getElementById('root')
+);
