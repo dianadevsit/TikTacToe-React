@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+// import './index.html';
 
 // The Square function renders a single <button>
 function Square(props) {
