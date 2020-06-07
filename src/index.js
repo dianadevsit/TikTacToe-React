@@ -4,19 +4,28 @@ import './index.css';
 
 // The Square component renders a single <button>
 class Square extends React.Component {
+   // TODO: remove the constructor
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: null,
+    };
+  }
   render() {
+    // TODO: use onClick={this.props.onClick}
+    // TODO: replace this.state.value with this.props.value
     return (
       <button
         className="square"
-        onClick={() => this.props.onClick()}
+        onClick={() => this.setState({ value: 'X' })}
       >
-        {this.props.value}
+        {this.state.value}
       </button>
     );
   }
 }
 
-// Board renders 9 squares
+// Boards renders 9 squares
 class Board extends React.Component {
   constructor(props) {
     super(props);
@@ -27,14 +36,10 @@ class Board extends React.Component {
   handleClick(i) {
     const squares = this.state.squares.slice();
     squares[i] = 'X';
-    this.setState({squares: squares});
+    this.setState({ squares: squares });
   }
   renderSquare(i) {
-    return (<Square
-      value={this.state.squares[i]}
-      onClick={() => this.handleClick(i)}
-    />
-    );
+    return <Square value={this.state.squares[i]} />;
   }
   render() {
     const status = 'Next player: X';
